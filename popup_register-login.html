@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <script>
+        // Ignore this in your implementation
+        window.isMbscDemo = true;
+    </script>
+
+    <title>Signup and login</title>
+
+    <!-- Mobiscroll JS and CSS Includes -->
+    <link rel="stylesheet" href="css3/mobiscroll.javascript.min.css">
+    <script src="js3/mobiscroll.javascript.min.js"></script>
+
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    body,
+    html {
+        height: 100%;
+    }
+
+    .md-social-btn .mbsc-ic {
+        float: left;
+    }
+    </style>
+
+</head>
+<body>
+
+<div mbsc-page class="demo-register-login">
+  <div style="height:100%">
+      <div mbsc-form>
+        <div class="mbsc-form-group">
+            <div class="mbsc-btn-group-block">
+                <button mbsc-button id="showRegister">Show register form</button>
+                <button mbsc-button id="showLogin">Show login form</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="demo" class="mbsc-cloak">
+        <div mbsc-form>
+            <div class="mbsc-form-group-inset">
+                <label>
+                    <input mbsc-input type="text" name="name" placeholder="Name" />
+                </label>
+                <label>
+                    <input mbsc-input type="text" name="email" placeholder="Email" />
+                </label>
+                <label>
+                    <input mbsc-input name="password" type="text" placeholder="Password" data-password-toggle="true" data-icon-show="eye" data-icon-hide="eye-blocked" />
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <div id="login" class="mbsc-cloak">
+        <div mbsc-form>
+            <div class="mbsc-form-group-inset">
+                <label>
+                    <input mbsc-input type="text" name="email" placeholder="Email" />
+                </label>
+                <label>
+                    <input mbsc-input name="password" type="text" placeholder="Password" data-password-toggle="true" data-icon-show="eye" data-icon-hide="eye-blocked" />
+                </label>
+            </div>
+            <div class="mbsc-align-center">or log in with one of your existing accounts</div>
+            <div class="mbsc-form-group-inset">
+                <button mbsc-button class="md-social-btn mbsc-btn-block" style="background:#3c5c9a;color:#fff;">
+                    <span class="mbsc-ic mbsc-ic-ion-social-facebook mbsc-pull-left"></span>
+                    Log in with Facebook
+                </button>
+                <button mbsc-button class="md-social-btn mbsc-btn-block" style="background:#28aae1;color:#fff;">
+                    <span class="mbsc-ic mbsc-ic-fa-twitter mbsc-pull-left"></span>
+                    Log in with Twitter
+                </button>
+                <button mbsc-button class="md-social-btn mbsc-btn-block" style="background:#d34230;color:#fff;">
+                    <span class="mbsc-ic mbsc-ic-fa-google mbsc-pull-left"></span>
+                    Log in with Google
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+    mobiscroll.settings = {
+        lang: 'en',                                  // Specify language like: lang: 'pl' or omit setting to use default
+        theme: 'ios',                                // Specify theme like: theme: 'ios' or omit setting to use default
+        themeVariant: 'light'                        // More info about themeVariant: https://docs.mobiscroll.com/4-10-9/javascript/popup#opt-themeVariant
+    };
+    
+    var register = mobiscroll.popup('#demo', {
+            display: 'center',                       // Specify display mode like: display: 'bottom' or omit setting to use default
+            buttons: [{                              // More info about buttons: https://docs.mobiscroll.com/4-10-9/javascript/popup#opt-buttons
+                text: 'Sign Up',
+                handler: 'set'
+            }]
+        }),
+        login = mobiscroll.popup('#login', {
+            display: 'center',                       // Specify display mode like: display: 'bottom' or omit setting to use default
+            buttons: [{                              // More info about buttons: https://docs.mobiscroll.com/4-10-9/javascript/popup#opt-buttons
+                text: 'Log In',
+                handler: 'set'
+            }],
+            onMarkupReady: function (event, inst) {  // More info about onMarkupReady: https://docs.mobiscroll.com/4-10-9/javascript/popup#event-onMarkupReady
+                var btns = event.target.querySelectorAll('.md-social-btn');
+                for (var i = 0; i < btns.length; ++i) {
+                    btns[i].addEventListener('click', function () {
+                        inst.hide();
+                    });
+                }
+            }
+        });
+
+    document
+        .getElementById('showRegister')
+        .addEventListener('click', function () {
+            register.show();
+        }, false);
+    
+    document
+        .getElementById('showLogin')
+        .addEventListener('click', function () {
+            login.show();
+        }, false);
+</script>
+
+</body>
+</html>
